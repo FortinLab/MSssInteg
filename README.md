@@ -1,6 +1,8 @@
 # MSssInteg
 Tool/steps for using MountainSort as pre-processing of spike snippets recorded by the Plexon MAP system.
 
+NOTE: Working with .plx files requires the Plexon offline SDK which can be found [here](https://plexon.com/wp-content/uploads/2017/08/OmniPlex-and-MAP-Offline-SDK-Bundle_0.zip). Make sure that toolbox is in your path when running this code.
+
 # Overview
 1. Use 'ConvertPLXtoMDA.m' to, as the name indicates, convert the data from the Plexon .plx format, into the .mda format used by MountainSort.
 
@@ -10,5 +12,5 @@ Tool/steps for using MountainSort as pre-processing of spike snippets recorded b
 
 4. Import the .nex files into Offline Sorter and then export as .plx.
 
-5. Open the newly created .plx file in Offline Sorter, change the channel assignment to Tetrode and then assess the output of MountainSort and cut any **obvious** missed clusters.
+5. Open the newly created .plx file in Offline Sorter, change  the channel assignment to Tetrode and then assess the output of MountainSort and identify any missed clusters.
 
