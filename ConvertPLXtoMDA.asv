@@ -94,22 +94,12 @@ for chan = 1:size(tsCountFl,2)-1
     % Next, go through and connect all the waveforms and get rid of all the
     % nan values. 
     if ismember(chan+1,tetChans)
-        % This is only done when you're on the final channel in a tetrode
         for wire = 1:size(curTet,1)
-            % Identify when the transition from a waveform to a nan period
-            % starts
             nanTrans = diff(isnan([0,curTet(wire,:),0]));
             nanBreakNdxs = [find(nanTrans==1)', find(nanTrans==-1)'];
-            % Now step through and make sure our indexs are appropriate and
-            % correct for the fact that our final value is identified as
-            % outside our trial indices. Using a while here may not be the
-            % best approach but it works.
             while nanBreakNdxs(end,2)>size(curTet,2)
-                nanBreakNdxs(end,2) = nanBreakNdxs(end,2) - 1; 
+                nanBreakNdxs(end,2) = nanBreakNdxs(end,2) - 1; %because the above method gives us our final value as outside 
             end
-            % Now step through each nan period and connect the waveforms
-            % with a linear interpolation between the end of one and the
-            % start of the next.
             for nanBreak = 1:size(nanBreakNdxs,1)
                 index1 = nanBreakNdxs(nanBreak,1);
                 index2 = nanBreakNdxs(nanBreak,2);
@@ -129,7 +119,6 @@ for chan = 1:size(tsCountFl,2)-1
             finalNanChk = isnan(curTet(wire,:));
             curTet(wire,finalNanChk) = 0;
         end
-        % Save it all!
         valleys = int32(curMinValleyNdx);
         writemda(valleys,sprintf('spike_times.tet%02d.mda',tetNum),'int32');
         writemda(curTet,sprintf('raw.tet%02d.mda',tetNum),'float32');
