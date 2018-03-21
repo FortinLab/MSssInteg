@@ -2,8 +2,7 @@ function ConvertAnalyzedMDAtoNEX
 %% ConvertAnalyzedMDAtoNEX
 %   File for converting .mda data into a .nex file so that it can be opened
 %   in Offline Sorter for spike verification.
-%   Ugh... I really don't want to go through and comment this file more...
-%   someone else do it, I'll buy you a candy bar. -GE
+%
 %   - 02/01/2018    Created by GE
 %
 %%
