@@ -68,8 +68,17 @@ for chan = 1:size(tsCountFl,2)-1
         disp(sprintf('----- Compiling Tetrode %02d -----',tetNum)); %#ok<DSPS>
     else
         % Every other channel in the tetrode just increases the tetrode
-        % channel number
+        % channel number 
         tetChanNum = tetChanNum + 1;
+        % BUT, if the first channel had zero waveforms you need to make the
+        % data structures that were otherwise made assuming there were no
+        % waveforms
+        if size(curValley,1)==1 && length(ts)>1
+            curValley = nan(length(ts),4);
+            curValleyInds = nan(length(ts),4);
+            curMinValley = nan(length(ts),1);
+            curMinValleyNdx = nan(length(ts),1);
+        end
     end    
     % Now step through each waveform and place that waveform in it's
     % correct time spot
