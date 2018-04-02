@@ -88,7 +88,15 @@ for chan = 1:size(tsCountFl,2)-1
         % Find the index for the timestamp associated with the waveform
         tsInd = round(ts(wf)*sampRate);
         % Fill in the waveform in it's correct position
-        curTet(tetChanNum,(tsInd-preThresh):(tsInd+(npw-preThresh-1))) = wave(wf,:);
+        if (tsInd-preThresh)>1
+            curTet(tetChanNum,(tsInd-preThresh):(tsInd+(npw-preThresh-1))) = wave(wf,:);
+        else 
+            % Only way it gets here is if the first spike was detected
+            % prior to the # of samples specified by pre-threshold, 
+            % so just consider the first waveform to be the start of the
+            % recording.
+            curTet(tetChanNum,1:npw) = wave(wf,:);
+        end
         % Identify the waveform vally index
         curValleyInds(wf,tetChanNum) = (wfMin-preThresh) + round(ts(wf)*sampRate);
         
