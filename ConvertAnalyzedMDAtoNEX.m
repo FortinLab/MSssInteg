@@ -108,7 +108,7 @@ if ~isempty(templateNums)
     disp('Duplicate waveforms ID''d');
 
     %% Combine Skipped waveforms and Duplicate waveforms into unsorted unit
-    tempSpkTms = [skpdSpks/params.samplerate;(dupeWvfmsNdxs/params.samplerate)'];
+    tempSpkTms = unique([skpdSpks/params.samplerate;(dupeWvfmsNdxs/params.samplerate)']);
     tempSpkTms = [tempSpkTms,(1:length(tempSpkTms))'];
     sortedSpkTms = sortrows(tempSpkTms);
     spikeTimes{1} = [sortedSpkTms(:,1)', nan];
