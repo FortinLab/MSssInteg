@@ -3,6 +3,8 @@ Tool/steps for using MountainSort as pre-processing of spike snippets recorded b
 
 Working with .plx files requires the Plexon offline SDK which can be found [here](https://plexon.com/wp-content/uploads/2017/08/OmniPlex-and-MAP-Offline-SDK-Bundle_0.zip). Make sure that toolbox is in your path when running this code.
 
+To create the .nex files requires the NeuroExplorer SDK which can be found [here](http://www.neuroexplorer.com/downloads/HowToReadAndWriteNexAndNex5FilesInMatlab.zip). Make sure that toolbox is in your path when running this code.
+
 You will also need the MountainSort Matlab files, which can be found through the Flat Iron Institute github page [here](https://github.com/flatironinstitute/mountainlab/tree/master/matlab/mdaio).
 
 # Overview
@@ -15,4 +17,3 @@ You will also need the MountainSort Matlab files, which can be found through the
 4. Import the .nex files into Offline Sorter and then export as .plx.
 
 5. Open the newly created .plx file in Offline Sorter, change  the channel assignment to Tetrode and then assess the output of MountainSort and identify any missed clusters.
-
