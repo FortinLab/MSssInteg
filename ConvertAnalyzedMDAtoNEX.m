@@ -10,15 +10,6 @@ function ConvertAnalyzedMDAtoNEX
 load('RosettaLC.mat');
 origCD = cd;
 %% Identify MDA and JSON files
-% Identify Original .plx file used 
-[origPLXfileName, origPLXfilePath] = uigetfile('.plx','Identify .PLX File');
-if origPLXfileName == 0
-    disp('Original plx file not selected');
-    return
-else
-    origPlxFile = [origPLXfilePath origPLXfileName];   
-    [~,~,~,~,~,~,numSampsPreSpk,~,~,~,~,~,~] = plx_information(origPlxFile);
-end
 % Load PARAMS file: the .json file created that contains the recordings
 % parameters used to guide MountainSort
 [jsonDataFile, jsonFilePath] = uigetfile('.json', 'Identify .json PARAMS file');
@@ -30,6 +21,15 @@ else
     text = fileread([jsonFilePath jsonDataFile]);
     params = jsondecode(text);
     fprintf('File %s Loaded\n', jsonDataFile);
+end
+% Identify Original .plx file used 
+[origPLXfileName, origPLXfilePath] = uigetfile('.plx','Identify ORIGINAL .PLX File');
+if origPLXfileName == 0
+    disp('Original plx file not selected');
+    return
+else
+    origPlxFile = [origPLXfilePath origPLXfileName];   
+    [~,~,~,~,~,~,numSampsPreSpk,~,~,~,~,~,~] = plx_information(origPlxFile);
 end
 % Load the FIRINGS file: the MountainSort output of spike timestamps and
 % cluster assignment
