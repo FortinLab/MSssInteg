@@ -18,6 +18,7 @@ if jsonDataFile == 0
     cd(origCD);
     return
 else
+    cd(jsonFilePath);
     text = fileread([jsonFilePath jsonDataFile]);
     params = jsondecode(text);
     fprintf('File %s Loaded\n', jsonDataFile);
@@ -28,6 +29,7 @@ if origPLXfileName == 0
     disp('Original plx file not selected');
     return
 else
+    cd(origPLXfilePath);
     origPlxFile = [origPLXfilePath origPLXfileName];   
     [~,~,~,~,~,~,numSampsPreSpk,~,~,~,~,~,~] = plx_information(origPlxFile);
 end
