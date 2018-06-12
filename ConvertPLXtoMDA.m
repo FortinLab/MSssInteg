@@ -37,12 +37,14 @@ mptRaw = nan(4,truncLim);
 % Pull out the timestamp (spike) count in order to direct the subsequent
 % for loop as well as identifying tetrode starting channels
 [tsCountFl, ~, ~, ~] = plx_info(plxFile, 1);
-tetChans = 1:nTrodes:(size(tsCountFl,2)-1);
+tetChans = 1:nTrodes:(size(tsCountFl,2));
 tetNum = 0;
 for chan = 1:size(tsCountFl,2)-1
+    tic
     % Pull out waveform data from the recording. NOTE: The input of 0 means
     % pull the unsorted units so make sure you're only using an UNCUT file
-    % in this analysis.
+    % in this analysis. OR that you've put all the crappy waveforms into
+    % units and have the CLEAN data in the UNSORTED (0) unit.
     %   numWFs = number of waveforms on that channel
     %   npw = number of points recorded per wave
     %   ts = timestamps associated with each waveform
@@ -152,6 +154,7 @@ for chan = 1:size(tsCountFl,2)-1
         writemda(curTet,sprintf('raw.tet%02d.mda',tetNum),'float32');
         disp(sprintf('::::: Tetrode %02d saved :::::',tetNum)); %#ok<DSPS>
         clear curTet curTS
+        toc
     end
 end
 
