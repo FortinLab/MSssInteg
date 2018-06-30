@@ -17,12 +17,14 @@ if nargin==0
     end
     plxFile = [filePath fileName];
 else
-    [filePath, ~] = fileparts(plxFile);
+    [filePath, fileName] = fileparts(plxFile);
     filePath = [filePath '\'];
 end
 origDir = cd;
 cd(filePath);
 
+%% Reassurance you actually started something...
+fprintf('Converting %s into .mda files\n', fileName);
 %% Identify channels and waveforms
 % Pull out relevant information from the recording file
 %   sampRate = sample rate the recording was done at
