@@ -1,4 +1,4 @@
-function ConvertPLXtoMDA
+function ConvertPLXtoMDA(plxFile)
 %% ConvertPLXtoMDA
 %   File for converting PLX data files into MDA files in order to use them
 %   with the MountainSort module in MountainLab.
@@ -9,12 +9,17 @@ function ConvertPLXtoMDA
 %       https://github.com/mari-sosa/Mountainsort_for_snippets/blob/master/mountainsort_for_snippets.md
 %
 %% Identify PLX file
-[fileName, filePath] = uigetfile('.plx','Identify .PLX File');
-if fileName == 0
-    disp('No file selected');
-    return
+if nargin==0
+    [fileName, filePath] = uigetfile('.plx','Identify .PLX File');
+    if fileName == 0
+        disp('No file selected');
+        return
+    end
+    plxFile = [filePath fileName];
+else
+    [filePath, ~] = fileparts(plxFile);
+    filePath = [filePath '\'];
 end
-plxFile = [filePath fileName];
 origDir = cd;
 cd(filePath);
 
