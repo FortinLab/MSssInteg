@@ -38,7 +38,6 @@ mptRaw = nan(4,truncLim);
 % for loop as well as identifying tetrode starting channels
 [tsCountFl, ~, ~, ~] = plx_info(plxFile, 1);
 tetChans = 1:nTrodes:(size(tsCountFl,2));
-tetNum = 0;
 for chan = 1:size(tsCountFl,2)-1
     tic
     % Pull out waveform data from the recording. NOTE: The input of 0 means
@@ -54,7 +53,7 @@ for chan = 1:size(tsCountFl,2)-1
         % Will only step here on the first channel per tetrode. This sets
         % up that tetrode's data
         % Identify the tetrode #
-        tetNum = tetNum+1;
+        tetNum = find(tetChans==chan,1,'first');
         % Copy mptRaw to create a new empty vector for filling in this
         % tetrode's data
         curTet = mptRaw;

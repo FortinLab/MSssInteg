@@ -96,6 +96,9 @@ skpdSpkWvfms = repmat({nan(1,params.clip_size)}, [length(skpdSpks), 4]);
 for wvfm = 1:length(skpdSpks)
     curSkpdWvfmNdx = skpdSpks(wvfm);
     for chan = 1:4
+        while length(raw)-(curSkpdWvfmNdx+(params.clip_size-(numSampsPreSpk+1)))<0
+            curSkpdWvfmNdx = curSkpdWvfmNdx-1;
+        end
         skpdSpkWvfms{wvfm,chan} = raw(chan,curSkpdWvfmNdx-numSampsPreSpk:curSkpdWvfmNdx+(params.clip_size-(numSampsPreSpk+1)));
     end
 end
