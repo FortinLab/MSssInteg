@@ -1,5 +1,5 @@
-function ConvertAnalyzedMDAtoNEX
-%% ConvertAnalyzedMDAtoNEX
+function ConvertAnalyzedMDAtoNEX2
+%% ConvertAnalyzedMDAtoNEX2
 %   File for converting .mda data into a .nex file so that it can be opened
 %   in Offline Sorter for spike verification.
 %   Ugh... I really don't want to go through and comment this file more...
@@ -69,6 +69,20 @@ else
     fprintf('File %s Loaded\n', rawDataFile);
     cd(rawFilePath);
 end
+
+% Load LFP file: the original continuous LFP trace used to construct the
+% spike+lfp file thrown at MountainSort
+[lfpDataFile, lfpFilePath] = uigetfile('.mda', 'Identify .mda RAW file');
+if lfpDataFile == 0
+    disp('No LFP file selected');
+    cd(origCD);
+    return
+else
+    lfp = readmda([lfpFilePath lfpDataFile]);
+    fprintf('File %s Loaded\n', lfpDataFile);
+    cd(lfpFilePath);
+end
+raw = raw-lfp;
 
 rawDataFileNameSplit = strsplit(rawDataFile, '.');
 tetName = rawDataFileNameSplit{2};
